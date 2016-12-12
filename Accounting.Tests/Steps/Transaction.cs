@@ -29,22 +29,28 @@ namespace Accounting.Tests.Steps
 
             foreach(var r in table.Rows)
             {
-                var credit = r["Credit"];
-                var debit = r["Debit"];
-                var creditAmount = r["Amount Credit"];
-                var debitAmount = r["Amount Debit"];
-
-                var isCredit = !string.IsNullOrWhiteSpace(credit);
-                var account = isCredit ? credit : debit;
-                var amount = isCredit ? creditAmount : debitAmount;
-
-                var entry = new TAccount_Entry
+                var creditStr = r["Credit"];
+                var debitStr = r["Debit"];
+                var creditAmountStr = r["Amount Credit"];
+                var debitAmountStr = r["Amount Debit"];
+                decimal? creditAmount = null;
+                decimal? debitAmount = null;
+                if (!string.IsNullOrWhiteSpace(creditAmountStr))
                 {
-                    Type = isCredit ? TAccount_EntryType.Credit : TAccount_EntryType.Debit,
-                    Account = this.cc.GetContext().TAccounts.FirstOrDefault(o => o.Number == account),
-                    Amount = decimal.Parse(amount)
-                };
-                trans.Entries.Add(entry);
+                    creditAmount = decimal.Parse(creditAmountStr);
+                }
+                if (!string.IsNullOrWhiteSpace(debitAmountStr))
+                {
+                    debitAmount = decimal.Parse(debitAmountStr);
+                }
+
+                transactionService.AddEntryToTransaction(
+                    trans,
+                    this.cc.GetContext().TAccounts.FirstOrDefault(o => o.Number == debitStr),
+                    this.cc.GetContext().TAccounts.FirstOrDefault(o => o.Number == creditStr),
+                    debitAmount,
+                    creditAmount
+                );
             }
 
             this.cc.GetContext().SaveChanges();

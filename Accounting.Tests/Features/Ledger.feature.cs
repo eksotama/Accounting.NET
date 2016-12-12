@@ -115,12 +115,9 @@ namespace Accounting.Tests.Features
             this.Ledger_CreateALedger_MandatoryPropertiesMissing("Name", "", "Ledger.Name.Empty", ((string[])(null)));
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ledger - Create a ledger - Depth must be a positive number")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ledger")]
-        public virtual void Ledger_CreateALedger_DepthMustBeAPositiveNumber()
+        public virtual void Ledger_CreateALedger_DepthMustBeAPositiveNumber(string description, string depth, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ledger - Create a ledger - Depth must be a positive number", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ledger - Create a ledger - Depth must be a positive number", exampleTags);
             this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Property",
@@ -130,10 +127,32 @@ namespace Accounting.Tests.Features
                         "Ledger1"});
             table3.AddRow(new string[] {
                         "Depth",
-                        "0"});
+                        string.Format("{0}", depth)});
             testRunner.When("I create a ledger \"L\" with the properties", ((string)(null)), table3, "When ");
             testRunner.Then("I receive this error message: \"Ledger.Depth.MustBeAPositiveNumber\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
             this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ledger - Create a ledger - Depth must be a positive number: Zero")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ledger")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Zero")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Zero")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Depth", "0")]
+        public virtual void Ledger_CreateALedger_DepthMustBeAPositiveNumber_Zero()
+        {
+            this.Ledger_CreateALedger_DepthMustBeAPositiveNumber("Zero", "0", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ledger - Create a ledger - Depth must be a positive number: Negative")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ledger")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Negative")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Negative")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Depth", "-1")]
+        public virtual void Ledger_CreateALedger_DepthMustBeAPositiveNumber_Negative()
+        {
+            this.Ledger_CreateALedger_DepthMustBeAPositiveNumber("Negative", "-1", ((string[])(null)));
         }
     }
 }

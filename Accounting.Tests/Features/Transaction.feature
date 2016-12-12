@@ -67,6 +67,19 @@ Scenario: Transaction - Record a transaction - NF
 		| TransDebit | Debit | Credit | TransCredit |
 		|            |       | 50.00  | 1           |
 
+Scenario Outline: Transaction - Record a transaction - Mandatory properties missing
+	When I record a transaction "TRANS1" on ledger "MyLedger"
+		| Debit   | Credit   | Amount Debit  | Amount Credit  |
+		| <Debit> | <Credit> | <AmountDebit> | <AmountCredit> |
+	Then I receive this error message: "<Message>"
+
+	Examples:
+	| Description                | Debit | Credit | AmountDebit | AmountCredit | Message                                           |
+	| Account missing            |       |        | 10.00       |              | Transaction.Record.Account.Missing                |
+	| Only one account per entry | 100   | 200    | 10.00       |              | Transaction.Record.Account.OnlyOneAccountPerEntry |
+	| Debit amount missing       | 100   |        |             |              | Transaction.Record.DebitAmount.Missing            |
+	| Credit amount missing      |       | 100    |             |              | Transaction.Record.CreditAmount.Missing           |
+
 Scenario: Transaction - Record a transaction - NF - Multiple accounts on debit side
 	When I record a transaction "TRANS1" on ledger "MyLedger"
 		| Debit | Credit | Amount Debit | Amount Credit |

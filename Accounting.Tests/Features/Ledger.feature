@@ -20,10 +20,14 @@ Scenario Outline: Ledger - Create a ledger - Mandatory properties missing
 	| Description | Name | Message           |
 	| Name        |      | Ledger.Name.Empty |
 
-Scenario: Ledger - Create a ledger - Depth must be a positive number
+Scenario Outline: Ledger - Create a ledger - Depth must be a positive number
 	When I create a ledger "L" with the properties
 		| Property | Value   |
 		| Name     | Ledger1 |
-		| Depth    | 0       |
+		| Depth    | <Depth> |
 	Then I receive this error message: "Ledger.Depth.MustBeAPositiveNumber"
 
+	Examples:
+	| Description | Depth |
+	| Zero        | 0     |
+	| Negative    | -1    |

@@ -85,4 +85,55 @@ Scenario: TAccount - Sum a TAccount - NF
 	And the debit balance of the TAccount "100" on ledger "MyLedger" is "11.00"
 	And the credit balance of the TAccount "100" on ledger "MyLedger" is "-11.00"
 
+Scenario: TAccount - Sum an aggregated TAccount - NF
+	Given I create a TAccount "T1" with the properties
+		| Property | Value       |
+		| Ledger   | MyLedger    |
+		| Type     | Assets      |
+		| Number   | 100         |
+		| Label    | Account 100 |
+	And I create a TAccount "T500" with the properties
+		| Property | Value       |
+		| Ledger   | MyLedger    |
+		| Type     | Assets      |
+		| Number   | 500         |
+		| Label    | Account 500 |
+	And I create a TAccount "T501" with the properties
+		| Property | Value       |
+		| Ledger   | MyLedger    |
+		| Type     | Assets      |
+		| Number   | 501         |
+		| Label    | Account 501 |
+	And I create a TAccount "T510" with the properties
+		| Property | Value       |
+		| Ledger   | MyLedger    |
+		| Type     | Assets      |
+		| Number   | 510         |
+		| Label    | Account 510 |
+	And I create a TAccount "T511" with the properties
+		| Property | Value       |
+		| Ledger   | MyLedger    |
+		| Type     | Assets      |
+		| Number   | 511         |
+		| Label    | Account 511 |
+	And I record a transaction "TRANS1" on ledger "MyLedger"
+		| Debit | Credit | Amount Debit | Amount Credit |
+		| 500   |        | 10.00        |               |
+		| 501   |        | 10.00        |               |
+		| 510   |        | 10.00        |               |
+		| 511   |        | 10.00        |               |
+		|       | 100    |              | 40.00         |
+	Then the debit sum of the TAccount "50" on ledger "MyLedger" is "20.00"
+	And the credit sum of the TAccount "50" on ledger "MyLedger" is "0.00"
+	And the debit balance of the TAccount "50" on ledger "MyLedger" is "20.00"
+	And the credit balance of the TAccount "50" on ledger "MyLedger" is "-20.00"
+	And the debit sum of the TAccount "51" on ledger "MyLedger" is "20.00"
+	And the credit sum of the TAccount "51" on ledger "MyLedger" is "0.00"
+	And the debit balance of the TAccount "51" on ledger "MyLedger" is "20.00"
+	And the credit balance of the TAccount "51" on ledger "MyLedger" is "-20.00"
+	And the debit sum of the TAccount "5" on ledger "MyLedger" is "40.00"
+	And the credit sum of the TAccount "5" on ledger "MyLedger" is "0.00"
+	And the debit balance of the TAccount "5" on ledger "MyLedger" is "40.00"
+	And the credit balance of the TAccount "5" on ledger "MyLedger" is "-40.00"
+
 	
