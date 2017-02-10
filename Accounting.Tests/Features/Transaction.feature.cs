@@ -83,9 +83,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table2.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table2.AddRow(new string[] {
                         "Number",
                         "100"});
             table2.AddRow(new string[] {
@@ -98,9 +95,6 @@ namespace Accounting.Tests.Features
             table3.AddRow(new string[] {
                         "Ledger",
                         "MyLedger"});
-            table3.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
             table3.AddRow(new string[] {
                         "Number",
                         "200"});
@@ -115,9 +109,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table4.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table4.AddRow(new string[] {
                         "Number",
                         "300"});
             table4.AddRow(new string[] {
@@ -130,9 +121,6 @@ namespace Accounting.Tests.Features
             table5.AddRow(new string[] {
                         "Ledger",
                         "MyLedger"});
-            table5.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
             table5.AddRow(new string[] {
                         "Number",
                         "500"});
@@ -147,9 +135,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table6.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table6.AddRow(new string[] {
                         "Number",
                         "501"});
             table6.AddRow(new string[] {
@@ -163,9 +148,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table7.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table7.AddRow(new string[] {
                         "Number",
                         "510"});
             table7.AddRow(new string[] {
@@ -178,9 +160,6 @@ namespace Accounting.Tests.Features
             table8.AddRow(new string[] {
                         "Ledger",
                         "MyLedger"});
-            table8.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
             table8.AddRow(new string[] {
                         "Number",
                         "511"});

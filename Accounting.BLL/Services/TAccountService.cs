@@ -34,7 +34,6 @@ namespace Accounting.BLL
             var result = new TAccountAggregated();
             result.Number = accountNumber;
             result.Label = "Aggregated Account - " + accountNumber;
-            result.Type = TAccount_Type.None;
             foreach(var a in accounts)
             {
                 result.Entries.AddRange(a.Entries);

@@ -93,9 +93,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table2.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table2.AddRow(new string[] {
                         "Number",
                         "123"});
             table2.AddRow(new string[] {
@@ -106,7 +103,7 @@ namespace Accounting.Tests.Features
             this.ScenarioCleanup();
         }
         
-        public virtual void TAccount_CreateATAccount_MandatoryPropertiesMissing(string description, string ledger, string type, string number, string label, string message, string[] exampleTags)
+        public virtual void TAccount_CreateATAccount_MandatoryPropertiesMissing(string description, string ledger, string number, string label, string message, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TAccount - Create a TAccount - Mandatory properties missing", exampleTags);
             this.ScenarioSetup(scenarioInfo);
@@ -117,9 +114,6 @@ namespace Accounting.Tests.Features
             table3.AddRow(new string[] {
                         "Ledger",
                         string.Format("{0}", ledger)});
-            table3.AddRow(new string[] {
-                        "Type",
-                        string.Format("{0}", type)});
             table3.AddRow(new string[] {
                         "Number",
                         string.Format("{0}", number)});
@@ -137,28 +131,12 @@ namespace Accounting.Tests.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Ledger")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Ledger")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Ledger", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Assets")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Number", "123")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Label", "My Account")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "TAccount.Ledger.Empty")]
         public virtual void TAccount_CreateATAccount_MandatoryPropertiesMissing_Ledger()
         {
-            this.TAccount_CreateATAccount_MandatoryPropertiesMissing("Ledger", "", "Assets", "123", "My Account", "TAccount.Ledger.Empty", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("TAccount - Create a TAccount - Mandatory properties missing: Type")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TAccount")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Type")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Type")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Ledger", "MyLedger")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Number", "123")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Label", "My Account")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "TAccount.Type.Empty")]
-        public virtual void TAccount_CreateATAccount_MandatoryPropertiesMissing_Type()
-        {
-            this.TAccount_CreateATAccount_MandatoryPropertiesMissing("Type", "MyLedger", "", "123", "My Account", "TAccount.Type.Empty", ((string[])(null)));
+            this.TAccount_CreateATAccount_MandatoryPropertiesMissing("Ledger", "", "123", "My Account", "TAccount.Ledger.Empty", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -167,13 +145,12 @@ namespace Accounting.Tests.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Number")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Number")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Ledger", "MyLedger")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Assets")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Number", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Label", "My Account")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "TAccount.Number.Empty")]
         public virtual void TAccount_CreateATAccount_MandatoryPropertiesMissing_Number()
         {
-            this.TAccount_CreateATAccount_MandatoryPropertiesMissing("Number", "MyLedger", "Assets", "", "My Account", "TAccount.Number.Empty", ((string[])(null)));
+            this.TAccount_CreateATAccount_MandatoryPropertiesMissing("Number", "MyLedger", "", "My Account", "TAccount.Number.Empty", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -182,13 +159,12 @@ namespace Accounting.Tests.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Label")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Label")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Ledger", "MyLedger")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Assets")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Number", "123")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Label", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "TAccount.Label.Empty")]
         public virtual void TAccount_CreateATAccount_MandatoryPropertiesMissing_Label()
         {
-            this.TAccount_CreateATAccount_MandatoryPropertiesMissing("Label", "MyLedger", "Assets", "123", "", "TAccount.Label.Empty", ((string[])(null)));
+            this.TAccount_CreateATAccount_MandatoryPropertiesMissing("Label", "MyLedger", "123", "", "TAccount.Label.Empty", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -205,9 +181,6 @@ namespace Accounting.Tests.Features
             table4.AddRow(new string[] {
                         "Ledger",
                         "MyLedger"});
-            table4.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
             table4.AddRow(new string[] {
                         "Number",
                         "12"});
@@ -234,9 +207,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table5.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table5.AddRow(new string[] {
                         "Number",
                         "1234"});
             table5.AddRow(new string[] {
@@ -262,9 +232,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table6.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table6.AddRow(new string[] {
                         "Number",
                         "100"});
             table6.AddRow(new string[] {
@@ -277,9 +244,6 @@ namespace Accounting.Tests.Features
             table7.AddRow(new string[] {
                         "Ledger",
                         "MyLedger"});
-            table7.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
             table7.AddRow(new string[] {
                         "Number",
                         "200"});
@@ -373,9 +337,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table12.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table12.AddRow(new string[] {
                         "Number",
                         "100"});
             table12.AddRow(new string[] {
@@ -388,9 +349,6 @@ namespace Accounting.Tests.Features
             table13.AddRow(new string[] {
                         "Ledger",
                         "MyLedger"});
-            table13.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
             table13.AddRow(new string[] {
                         "Number",
                         "500"});
@@ -405,9 +363,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table14.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table14.AddRow(new string[] {
                         "Number",
                         "501"});
             table14.AddRow(new string[] {
@@ -421,9 +376,6 @@ namespace Accounting.Tests.Features
                         "Ledger",
                         "MyLedger"});
             table15.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
-            table15.AddRow(new string[] {
                         "Number",
                         "510"});
             table15.AddRow(new string[] {
@@ -436,9 +388,6 @@ namespace Accounting.Tests.Features
             table16.AddRow(new string[] {
                         "Ledger",
                         "MyLedger"});
-            table16.AddRow(new string[] {
-                        "Type",
-                        "Assets"});
             table16.AddRow(new string[] {
                         "Number",
                         "511"});

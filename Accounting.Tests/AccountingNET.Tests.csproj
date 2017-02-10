@@ -84,6 +84,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Features\Macro.feature.cs">
+      <DependentUpon>Macro.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Features\Ledger.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -101,6 +106,7 @@
       <DependentUpon>TAccount.feature</DependentUpon>
     </Compile>
     <Compile Include="Steps\CommonSteps.cs" />
+    <Compile Include="Steps\Macro.cs" />
     <Compile Include="Steps\Ledger.cs" />
     <Compile Include="Steps\TAccount.cs" />
     <Compile Include="Steps\Transaction.cs" />
@@ -108,6 +114,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\Macro.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Macro.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Ledger.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Ledger.feature.cs</LastGenOutput>
@@ -121,6 +131,7 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TAccount.feature.cs</LastGenOutput>
     </None>
+    <None Include="Resources\TAccounts\pcmn_be.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Accounting.BLL\AccountingNET.BLL.csproj">

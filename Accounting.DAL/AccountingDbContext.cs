@@ -21,8 +21,8 @@ namespace Accounting.DAL
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<Ledger> Ledgers { get; set; }
         public virtual DbSet<TAccount> TAccounts { get; set; }
-        //public virtual DbSet<TAccount_Entry> TAccount_Entries { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Macro> Macros { get; set; }
 
         public List<Message> Messages { get; set; }
 

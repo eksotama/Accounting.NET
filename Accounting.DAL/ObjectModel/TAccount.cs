@@ -20,7 +20,6 @@ namespace Accounting.DAL
 
     public interface IProcessableTAccount
     {
-        TAccount_Type Type { get; set; }
         string Number { get; set; }
         string Label { get; set; }
         List<TAccount_Entry> Entries { get; set; }
@@ -36,9 +35,7 @@ namespace Accounting.DAL
 
         [NotMapped]
         public string Number { get; set; }
-
-        [NotMapped]
-        public TAccount_Type Type { get; set; }
+        
 
         public TAccountAggregated()
         {
@@ -51,7 +48,6 @@ namespace Accounting.DAL
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public TAccount_Type Type { get; set; }
         public string Number { get; set; }
         public string Label { get; set; }
 
@@ -75,10 +71,6 @@ namespace Accounting.DAL
                 if (obj.Ledger == null)
                 {
                     "TAccount.Ledger.Empty".AddErrorMessage(context, errors);
-                }
-                if (obj.Type == TAccount_Type.None)
-                {
-                    "TAccount.Type.Empty".AddErrorMessage(context, errors);
                 }
                 if (string.IsNullOrWhiteSpace(obj.Number))
                 {

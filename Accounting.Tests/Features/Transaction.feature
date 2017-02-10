@@ -9,43 +9,36 @@ Background:
 	Given I create a TAccount "T100" with the properties
 		| Property | Value       |
 		| Ledger   | MyLedger    |
-		| Type     | Assets      |
 		| Number   | 100         |
 		| Label    | Account 100 |
 	And I create a TAccount "T200" with the properties
 		| Property | Value       |
 		| Ledger   | MyLedger    |
-		| Type     | Assets      |
 		| Number   | 200         |
 		| Label    | Account 200 |
 	And I create a TAccount "T300" with the properties
 		| Property | Value       |
 		| Ledger   | MyLedger    |
-		| Type     | Assets      |
 		| Number   | 300         |
 		| Label    | Account 300 |
 	And I create a TAccount "T500" with the properties
 		| Property | Value       |
 		| Ledger   | MyLedger    |
-		| Type     | Assets      |
 		| Number   | 500         |
 		| Label    | Account 500 |
 	And I create a TAccount "T501" with the properties
 		| Property | Value       |
 		| Ledger   | MyLedger    |
-		| Type     | Assets      |
 		| Number   | 501         |
 		| Label    | Account 501 |
 	And I create a TAccount "T510" with the properties
 		| Property | Value       |
 		| Ledger   | MyLedger    |
-		| Type     | Assets      |
 		| Number   | 510         |
 		| Label    | Account 510 |
 	And I create a TAccount "T511" with the properties
 		| Property | Value       |
 		| Ledger   | MyLedger    |
-		| Type     | Assets      |
 		| Number   | 511         |
 		| Label    | Account 511 |
 

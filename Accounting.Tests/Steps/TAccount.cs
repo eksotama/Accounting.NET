@@ -38,13 +38,6 @@ namespace Accounting.Tests.Steps
                             account.Ledger = ledger;
                         }
                         break;
-                    case "Type":
-                        {
-                            value = string.IsNullOrWhiteSpace(value) ? "None" : value;
-                            var type = (TAccount_Type)Enum.Parse(typeof(TAccount_Type), value);
-                            account.Type = type;
-                        }
-                        break;
                     case "Number":
                         {
                             account.Number = value;
