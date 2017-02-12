@@ -9,11 +9,11 @@ using TechTalk.SpecFlow;
 namespace Accounting.Tests
 {
     [Binding]
-    public class Ledger
+    public sealed class LedgerSteps
     {
         private CommonContext cc { get; set; }
 
-        public Ledger(CommonContext commonContext)
+        public LedgerSteps(CommonContext commonContext)
         {
             cc = commonContext;
         }
@@ -38,6 +38,8 @@ namespace Accounting.Tests
             }
 
             cc.GetContext().SaveChanges();
+
+            cc.ObjectBag["ledger-" + reference] = l;
         }
 
     }

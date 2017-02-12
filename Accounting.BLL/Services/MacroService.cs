@@ -24,10 +24,10 @@ namespace Accounting.BLL
             return l;
         }
 
-        public string RunScript(Macro m)
+        public string RunScript(Macro m, Ledger l)
         {
             var scriptRunner = new MacroScriptRunner();
-            return scriptRunner.RunScript(m.Script);
+            return scriptRunner.RunScript(m.Script, l, Context);
         }
     }
 }

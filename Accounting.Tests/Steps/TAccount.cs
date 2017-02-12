@@ -10,11 +10,11 @@ using TechTalk.SpecFlow;
 namespace Accounting.Tests.Steps
 {
     [Binding]
-    public sealed class TAccount
+    public sealed class TAccountSteps
     {
         private CommonContext cc { get; set; }
 
-        public TAccount(CommonContext commonContext)
+        public TAccountSteps(CommonContext commonContext)
         {
             cc = commonContext;
         }

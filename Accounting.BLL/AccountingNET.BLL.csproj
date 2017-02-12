@@ -83,6 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\MacroScriptRunner.cs" />
+    <Compile Include="ScriptProxies\MacroProxy.cs" />
+    <Compile Include="ScriptProxies\LedgerProxy.cs" />
+    <Compile Include="ScriptProxies\TransactionProxy.cs" />
     <Compile Include="Services\MacroService.cs" />
     <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\LedgerService.cs" />

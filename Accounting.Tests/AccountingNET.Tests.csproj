@@ -84,15 +84,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Features\Macro.feature.cs">
-      <DependentUpon>Macro.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Features\Ledger.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Ledger.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Macro.feature.cs">
+      <DependentUpon>Macro.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Features\Transaction.feature.cs">
       <AutoGen>True</AutoGen>

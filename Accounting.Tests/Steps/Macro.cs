@@ -11,7 +11,7 @@ using TechTalk.SpecFlow;
 namespace Accounting.Tests
 {
     [Binding]
-    public class MacroSteps
+    public sealed class MacroSteps
     {
         private CommonContext cc { get; set; }
 
@@ -54,13 +54,17 @@ namespace Accounting.Tests
             cc.GetContext().SaveChanges();
         }
 
-        [When(@"I execute the macro ""(.*)"" into result ""(.*)""")]
-        public void WhenIExecuteTheMacroIntoResult(string reference, string resultReference)
+        [When(@"I execute the macro ""(\w+)"" on ledger ""(\w+)"" into result ""(.*)""")]
+        public void WhenIExecuteTheMacroIntoResult(string reference, string ledgerReference, string resultReference)
         {
             var m = (Macro)cc.ObjectBag["macro-" + reference];
+            var l = (Ledger)cc.ObjectBag["ledger-" + ledgerReference];
             cc.GetContext().Entry(m).Reload();
+            cc.GetContext().Entry(l).Reload();
             var service = new MacroService(cc.GetContext());
-            var result = service.RunScript(m);
+            var result = service.RunScript(m, l);
+
+            cc.GetContext().SaveChanges();
 
             cc.ObjectBag["macroResult-" + resultReference] = result;
         }

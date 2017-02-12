@@ -10,11 +10,11 @@ using TechTalk.SpecFlow;
 namespace Accounting.Tests.Steps
 {
     [Binding]
-    public sealed class TransactionSteos
+    public sealed class TransactionSteps
     {
         private CommonContext cc { get; set; }
 
-        public TransactionSteos(CommonContext commonContext)
+        public TransactionSteps(CommonContext commonContext)
         {
             cc = commonContext;
         }
