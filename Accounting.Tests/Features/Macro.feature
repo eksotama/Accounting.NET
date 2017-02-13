@@ -97,6 +97,53 @@ Scenario: Macro - Define script - Call another macro
 	When I execute the macro "M2" on ledger "L" into result "MR"
 	Then the macro result "MR" is "10.00"
 
+Scenario: Macro - Define script - Call another macro with parameters
+	Given I create a macro "M" with the properties
+		| Property | Value  |
+		| Name     | Macro1 |
+	And I update the script of the macro "M" to 
+		"""
+		def __main():
+			return __X__ + __Y__
+		#enddef
+		"""
+	And I create a macro "M2" with the properties
+		| Property | Value  |
+		| Name     | Macro2 |
+	And I update the script of the macro "M2" to 
+		"""
+		def __main():
+			return _macro.call('Macro1', { 'X':'10.00', 'Y':'5.00' })
+		#enddef
+		"""
+	When I execute the macro "M2" on ledger "L" into result "MR"
+	Then the macro result "MR" is "15.00"
+
+Scenario: Macro - Define script - Call another macro with parameters - forward parameters
+	Given I create a macro "M" with the properties
+		| Property | Value  |
+		| Name     | Macro1 |
+	And I update the script of the macro "M" to 
+		"""
+		def __main():
+			return __X__ + __Y__
+		#enddef
+		"""
+	And I create a macro "M2" with the properties
+		| Property | Value  |
+		| Name     | Macro2 |
+	And I update the script of the macro "M2" to 
+		"""
+		def __main():
+			return _macro.call('Macro1', { 'X':'__A__', 'Y':'__B__' })
+		#enddef
+		"""
+	When I execute the macro "M2" on ledger "L" into result "MR" with parameters
+		| Name | Value |
+		| A    | 10.00 |
+		| B    | 5.00  |
+	Then the macro result "MR" is "15.00"
+
 Scenario: Macro - Define script - Add a transaction
 	Given I create a macro "M" with the properties
 		| Property | Value  |

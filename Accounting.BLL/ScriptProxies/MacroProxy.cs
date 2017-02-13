@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Accounting.DAL;
+using IronPython.Runtime;
 
 namespace Accounting.BLL
 {
@@ -20,10 +21,20 @@ namespace Accounting.BLL
             _context = context;
         }
 
-        public string call(string macroName)
+        public string call(string macroName, PythonDictionary parameters = null)
         {
             var macro = _context.Macros.FirstOrDefault(o => o.Name == macroName);
-            var result = _runner.RunScript(macro.Script, _ledger, _context);
+            var script = macro.Script;
+            if (parameters != null)
+            {
+                var macroParameters = new MacroScriptParameters();
+                foreach (var k in parameters.keys())
+                {
+                    macroParameters.SetParameter((string)k, (string)parameters.get((string)k));
+                }
+                script = macroParameters.ReplaceParameters(macro);
+            }
+            var result = _runner.RunScript(script, _ledger, _context);
             return result;
         }
     }

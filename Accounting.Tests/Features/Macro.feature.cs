@@ -334,11 +334,11 @@ namespace Accounting.Tests.Features
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Add a transaction")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Call another macro with parameters")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        public virtual void Macro_DefineScript_AddATransaction()
+        public virtual void Macro_DefineScript_CallAnotherMacroWithParameters()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Add a transaction", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Call another macro with parameters", ((string[])(null)));
             this.ScenarioSetup(scenarioInfo);
             this.FeatureBackground();
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -348,84 +348,78 @@ namespace Accounting.Tests.Features
                         "Name",
                         "Macro1"});
             testRunner.Given("I create a macro \"M\" with the properties", ((string)(null)), table10, "Given ");
-            testRunner.And("I update the script of the macro \"M\" to", "def __main():\r\n\tt = _ledger.T()\r\n\tt.D(\'100\', 5.00)\r\n\tt.D(\'200\', 5.00)\r\n\tt.C(\'300\'" +
-                    ", 10.00)\r\n#enddef", ((TechTalk.SpecFlow.Table)(null)), "And ");
-            testRunner.When("I execute the macro \"M\" on ledger \"L\" into result \"MR\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+            testRunner.And("I update the script of the macro \"M\" to", "def __main():\r\n\treturn __X__ + __Y__\r\n#enddef", ((TechTalk.SpecFlow.Table)(null)), "And ");
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
-                        "TransDebit",
-                        "Debit",
-                        "Credit",
-                        "TransCredit"});
+                        "Property",
+                        "Value"});
             table11.AddRow(new string[] {
-                        "1",
-                        "5.00",
-                        "",
-                        ""});
-            testRunner.Then("the content of the TAccount \"100\" on ledger \"MyLedger\" is", ((string)(null)), table11, "Then ");
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
-                        "TransDebit",
-                        "Debit",
-                        "Credit",
-                        "TransCredit"});
-            table12.AddRow(new string[] {
-                        "1",
-                        "5.00",
-                        "",
-                        ""});
-            testRunner.And("the content of the TAccount \"200\" on ledger \"MyLedger\" is", ((string)(null)), table12, "And ");
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
-                        "TransDebit",
-                        "Debit",
-                        "Credit",
-                        "TransCredit"});
-            table13.AddRow(new string[] {
-                        "",
-                        "",
-                        "10.00",
-                        "1"});
-            testRunner.And("the content of the TAccount \"300\" on ledger \"MyLedger\" is", ((string)(null)), table13, "And ");
+                        "Name",
+                        "Macro2"});
+            testRunner.And("I create a macro \"M2\" with the properties", ((string)(null)), table11, "And ");
+            testRunner.And("I update the script of the macro \"M2\" to", "def __main():\r\n\treturn _macro.call(\'Macro1\', { \'X\':\'10.00\', \'Y\':\'5.00\' })\r\n#endde" +
+                    "f", ((TechTalk.SpecFlow.Table)(null)), "And ");
+            testRunner.When("I execute the macro \"M2\" on ledger \"L\" into result \"MR\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+            testRunner.Then("the macro result \"MR\" is \"15.00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Add a transaction with parameters")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Call another macro with parameters - forward parameters")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        public virtual void Macro_DefineScript_AddATransactionWithParameters()
+        public virtual void Macro_DefineScript_CallAnotherMacroWithParameters_ForwardParameters()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Add a transaction with parameters", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Call another macro with parameters - forward parameters", ((string[])(null)));
             this.ScenarioSetup(scenarioInfo);
             this.FeatureBackground();
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Property",
                         "Value"});
-            table14.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Name",
                         "Macro1"});
-            testRunner.Given("I create a macro \"M\" with the properties", ((string)(null)), table14, "Given ");
-            testRunner.And("I update the script of the macro \"M\" to", "def __main():\r\n\tt = _ledger.T()\r\n\tt.__CD1__(\'100\', __Var1__)\r\n\tt.__CD2__(\'200\', _" +
-                    "_Var2__)\r\n\tt.__CD3__(\'300\', __Var3__)\r\n#enddef", ((TechTalk.SpecFlow.Table)(null)), "And ");
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            testRunner.Given("I create a macro \"M\" with the properties", ((string)(null)), table12, "Given ");
+            testRunner.And("I update the script of the macro \"M\" to", "def __main():\r\n\treturn __X__ + __Y__\r\n#enddef", ((TechTalk.SpecFlow.Table)(null)), "And ");
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Property",
+                        "Value"});
+            table13.AddRow(new string[] {
+                        "Name",
+                        "Macro2"});
+            testRunner.And("I create a macro \"M2\" with the properties", ((string)(null)), table13, "And ");
+            testRunner.And("I update the script of the macro \"M2\" to", "def __main():\r\n\treturn _macro.call(\'Macro1\', { \'X\':\'__A__\', \'Y\':\'__B__\' })\r\n#endd" +
+                    "ef", ((TechTalk.SpecFlow.Table)(null)), "And ");
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name",
                         "Value"});
-            table15.AddRow(new string[] {
-                        "Var1",
-                        "5.00"});
-            table15.AddRow(new string[] {
-                        "CD1",
-                        "D"});
-            table15.AddRow(new string[] {
-                        "Var2",
-                        "5.00"});
-            table15.AddRow(new string[] {
-                        "CD2",
-                        "D"});
-            table15.AddRow(new string[] {
-                        "Var3",
+            table14.AddRow(new string[] {
+                        "A",
                         "10.00"});
+            table14.AddRow(new string[] {
+                        "B",
+                        "5.00"});
+            testRunner.When("I execute the macro \"M2\" on ledger \"L\" into result \"MR\" with parameters", ((string)(null)), table14, "When ");
+            testRunner.Then("the macro result \"MR\" is \"15.00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Add a transaction")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
+        public virtual void Macro_DefineScript_AddATransaction()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Add a transaction", ((string[])(null)));
+            this.ScenarioSetup(scenarioInfo);
+            this.FeatureBackground();
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Property",
+                        "Value"});
             table15.AddRow(new string[] {
-                        "CD3",
-                        "C"});
-            testRunner.When("I execute the macro \"M\" on ledger \"L\" into result \"MR\" with parameters", ((string)(null)), table15, "When ");
+                        "Name",
+                        "Macro1"});
+            testRunner.Given("I create a macro \"M\" with the properties", ((string)(null)), table15, "Given ");
+            testRunner.And("I update the script of the macro \"M\" to", "def __main():\r\n\tt = _ledger.T()\r\n\tt.D(\'100\', 5.00)\r\n\tt.D(\'200\', 5.00)\r\n\tt.C(\'300\'" +
+                    ", 10.00)\r\n#enddef", ((TechTalk.SpecFlow.Table)(null)), "And ");
+            testRunner.When("I execute the macro \"M\" on ledger \"L\" into result \"MR\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "TransDebit",
                         "Debit",
@@ -459,6 +453,81 @@ namespace Accounting.Tests.Features
                         "10.00",
                         "1"});
             testRunner.And("the content of the TAccount \"300\" on ledger \"MyLedger\" is", ((string)(null)), table18, "And ");
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Add a transaction with parameters")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
+        public virtual void Macro_DefineScript_AddATransactionWithParameters()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Add a transaction with parameters", ((string[])(null)));
+            this.ScenarioSetup(scenarioInfo);
+            this.FeatureBackground();
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Property",
+                        "Value"});
+            table19.AddRow(new string[] {
+                        "Name",
+                        "Macro1"});
+            testRunner.Given("I create a macro \"M\" with the properties", ((string)(null)), table19, "Given ");
+            testRunner.And("I update the script of the macro \"M\" to", "def __main():\r\n\tt = _ledger.T()\r\n\tt.__CD1__(\'100\', __Var1__)\r\n\tt.__CD2__(\'200\', _" +
+                    "_Var2__)\r\n\tt.__CD3__(\'300\', __Var3__)\r\n#enddef", ((TechTalk.SpecFlow.Table)(null)), "And ");
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Value"});
+            table20.AddRow(new string[] {
+                        "Var1",
+                        "5.00"});
+            table20.AddRow(new string[] {
+                        "CD1",
+                        "D"});
+            table20.AddRow(new string[] {
+                        "Var2",
+                        "5.00"});
+            table20.AddRow(new string[] {
+                        "CD2",
+                        "D"});
+            table20.AddRow(new string[] {
+                        "Var3",
+                        "10.00"});
+            table20.AddRow(new string[] {
+                        "CD3",
+                        "C"});
+            testRunner.When("I execute the macro \"M\" on ledger \"L\" into result \"MR\" with parameters", ((string)(null)), table20, "When ");
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                        "TransDebit",
+                        "Debit",
+                        "Credit",
+                        "TransCredit"});
+            table21.AddRow(new string[] {
+                        "1",
+                        "5.00",
+                        "",
+                        ""});
+            testRunner.Then("the content of the TAccount \"100\" on ledger \"MyLedger\" is", ((string)(null)), table21, "Then ");
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                        "TransDebit",
+                        "Debit",
+                        "Credit",
+                        "TransCredit"});
+            table22.AddRow(new string[] {
+                        "1",
+                        "5.00",
+                        "",
+                        ""});
+            testRunner.And("the content of the TAccount \"200\" on ledger \"MyLedger\" is", ((string)(null)), table22, "And ");
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                        "TransDebit",
+                        "Debit",
+                        "Credit",
+                        "TransCredit"});
+            table23.AddRow(new string[] {
+                        "",
+                        "",
+                        "10.00",
+                        "1"});
+            testRunner.And("the content of the TAccount \"300\" on ledger \"MyLedger\" is", ((string)(null)), table23, "And ");
             this.ScenarioCleanup();
         }
     }

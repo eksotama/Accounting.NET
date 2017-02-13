@@ -28,18 +28,18 @@ namespace Accounting.BLL
             {
                 var source = en.CreateScriptSourceFromString(script, SourceCodeKind.Statements);
                 source.Execute(scope);
-                var __result = scope.GetVariable("__result");
-                if (__result is int)
+                var resultPy = scope.GetVariable("__result");
+                if (resultPy is int)
                 {
-                    result = ((int) __result).ToString();
+                    result = ((int)resultPy).ToString();
                 }
-                else if (__result is double)
+                else if (resultPy is double)
                 {
-                    result = ((double) __result).ToString("F2");
+                    result = ((double)resultPy).ToString("F2");
                 }
                 else
                 {
-                    result = (string) __result;
+                    result = (string)resultPy;
                 }
             }
             catch (Exception ex)
