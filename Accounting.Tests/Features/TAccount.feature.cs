@@ -226,31 +226,34 @@ namespace Accounting.Tests.Features
             this.ScenarioSetup(scenarioInfo);
             this.FeatureBackground();
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Property",
-                        "Value"});
-            table6.AddRow(new string[] {
-                        "Ledger",
-                        "MyLedger"});
-            table6.AddRow(new string[] {
                         "Number",
-                        "100"});
+                        "Ledger",
+                        "Label"});
             table6.AddRow(new string[] {
-                        "Label",
+                        "100",
+                        "MyLedger",
                         "Account 100"});
-            testRunner.Given("I create a TAccount \"T1\" with the properties", ((string)(null)), table6, "Given ");
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Property",
-                        "Value"});
-            table7.AddRow(new string[] {
-                        "Ledger",
-                        "MyLedger"});
-            table7.AddRow(new string[] {
-                        "Number",
-                        "200"});
-            table7.AddRow(new string[] {
-                        "Label",
+            table6.AddRow(new string[] {
+                        "200",
+                        "MyLedger",
                         "Account 200"});
-            testRunner.And("I create a TAccount \"T2\" with the properties", ((string)(null)), table7, "And ");
+            testRunner.Given("I create multiple TAccounts", ((string)(null)), table6, "Given ");
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Debit",
+                        "Credit",
+                        "Amount Debit",
+                        "Amount Credit"});
+            table7.AddRow(new string[] {
+                        "100",
+                        "",
+                        "10.00",
+                        ""});
+            table7.AddRow(new string[] {
+                        "",
+                        "200",
+                        "",
+                        "10.00"});
+            testRunner.And("I record a transaction \"TRANS1\" on ledger \"MyLedger\"", ((string)(null)), table7, "And ");
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Debit",
                         "Credit",
@@ -259,30 +262,30 @@ namespace Accounting.Tests.Features
             table8.AddRow(new string[] {
                         "100",
                         "",
-                        "10.00",
+                        "5.00",
                         ""});
             table8.AddRow(new string[] {
                         "",
                         "200",
                         "",
-                        "10.00"});
-            testRunner.And("I record a transaction \"TRANS1\" on ledger \"MyLedger\"", ((string)(null)), table8, "And ");
+                        "5.00"});
+            testRunner.And("I record a transaction \"TRANS2\" on ledger \"MyLedger\"", ((string)(null)), table8, "And ");
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Debit",
                         "Credit",
                         "Amount Debit",
                         "Amount Credit"});
             table9.AddRow(new string[] {
-                        "100",
+                        "200",
                         "",
-                        "5.00",
+                        "2.00",
                         ""});
             table9.AddRow(new string[] {
                         "",
-                        "200",
+                        "100",
                         "",
-                        "5.00"});
-            testRunner.And("I record a transaction \"TRANS2\" on ledger \"MyLedger\"", ((string)(null)), table9, "And ");
+                        "2.00"});
+            testRunner.And("I record a transaction \"TRANS3\" on ledger \"MyLedger\"", ((string)(null)), table9, "And ");
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Debit",
                         "Credit",
@@ -298,23 +301,7 @@ namespace Accounting.Tests.Features
                         "100",
                         "",
                         "2.00"});
-            testRunner.And("I record a transaction \"TRANS3\" on ledger \"MyLedger\"", ((string)(null)), table10, "And ");
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Debit",
-                        "Credit",
-                        "Amount Debit",
-                        "Amount Credit"});
-            table11.AddRow(new string[] {
-                        "200",
-                        "",
-                        "2.00",
-                        ""});
-            table11.AddRow(new string[] {
-                        "",
-                        "100",
-                        "",
-                        "2.00"});
-            testRunner.And("I record a transaction \"TRANS4\" on ledger \"MyLedger\"", ((string)(null)), table11, "And ");
+            testRunner.And("I record a transaction \"TRANS4\" on ledger \"MyLedger\"", ((string)(null)), table10, "And ");
             testRunner.Then("the debit sum of the TAccount \"100\" on ledger \"MyLedger\" is \"15.00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
             testRunner.And("the credit sum of the TAccount \"100\" on ledger \"MyLedger\" is \"4.00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
             testRunner.And("the debit balance of the TAccount \"100\" on ledger \"MyLedger\" is \"11.00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -330,102 +317,62 @@ namespace Accounting.Tests.Features
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TAccount - Sum an aggregated TAccount - NF", ((string[])(null)));
             this.ScenarioSetup(scenarioInfo);
             this.FeatureBackground();
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Property",
-                        "Value"});
-            table12.AddRow(new string[] {
-                        "Ledger",
-                        "MyLedger"});
-            table12.AddRow(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Number",
-                        "100"});
-            table12.AddRow(new string[] {
-                        "Label",
+                        "Ledger",
+                        "Label"});
+            table11.AddRow(new string[] {
+                        "100",
+                        "MyLedger",
                         "Account 100"});
-            testRunner.Given("I create a TAccount \"T1\" with the properties", ((string)(null)), table12, "Given ");
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Property",
-                        "Value"});
-            table13.AddRow(new string[] {
-                        "Ledger",
-                        "MyLedger"});
-            table13.AddRow(new string[] {
-                        "Number",
-                        "500"});
-            table13.AddRow(new string[] {
-                        "Label",
+            table11.AddRow(new string[] {
+                        "500",
+                        "MyLedger",
                         "Account 500"});
-            testRunner.And("I create a TAccount \"T500\" with the properties", ((string)(null)), table13, "And ");
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Property",
-                        "Value"});
-            table14.AddRow(new string[] {
-                        "Ledger",
-                        "MyLedger"});
-            table14.AddRow(new string[] {
-                        "Number",
-                        "501"});
-            table14.AddRow(new string[] {
-                        "Label",
+            table11.AddRow(new string[] {
+                        "501",
+                        "MyLedger",
                         "Account 501"});
-            testRunner.And("I create a TAccount \"T501\" with the properties", ((string)(null)), table14, "And ");
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Property",
-                        "Value"});
-            table15.AddRow(new string[] {
-                        "Ledger",
-                        "MyLedger"});
-            table15.AddRow(new string[] {
-                        "Number",
-                        "510"});
-            table15.AddRow(new string[] {
-                        "Label",
+            table11.AddRow(new string[] {
+                        "510",
+                        "MyLedger",
                         "Account 510"});
-            testRunner.And("I create a TAccount \"T510\" with the properties", ((string)(null)), table15, "And ");
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Property",
-                        "Value"});
-            table16.AddRow(new string[] {
-                        "Ledger",
-                        "MyLedger"});
-            table16.AddRow(new string[] {
-                        "Number",
-                        "511"});
-            table16.AddRow(new string[] {
-                        "Label",
+            table11.AddRow(new string[] {
+                        "511",
+                        "MyLedger",
                         "Account 511"});
-            testRunner.And("I create a TAccount \"T511\" with the properties", ((string)(null)), table16, "And ");
-            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+            testRunner.Given("I create multiple TAccounts", ((string)(null)), table11, "Given ");
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Debit",
                         "Credit",
                         "Amount Debit",
                         "Amount Credit"});
-            table17.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "500",
                         "",
                         "10.00",
                         ""});
-            table17.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "501",
                         "",
                         "10.00",
                         ""});
-            table17.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "510",
                         "",
                         "10.00",
                         ""});
-            table17.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "511",
                         "",
                         "10.00",
                         ""});
-            table17.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "",
                         "100",
                         "",
                         "40.00"});
-            testRunner.And("I record a transaction \"TRANS1\" on ledger \"MyLedger\"", ((string)(null)), table17, "And ");
+            testRunner.And("I record a transaction \"TRANS1\" on ledger \"MyLedger\"", ((string)(null)), table12, "And ");
             testRunner.Then("the debit sum of the TAccount \"50\" on ledger \"MyLedger\" is \"20.00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
             testRunner.And("the credit sum of the TAccount \"50\" on ledger \"MyLedger\" is \"0.00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
             testRunner.And("the debit balance of the TAccount \"50\" on ledger \"MyLedger\" is \"20.00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

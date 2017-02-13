@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NMemory.Utilities;
 using TechTalk.SpecFlow;
 
 namespace Accounting.Tests.Steps
@@ -49,6 +50,25 @@ namespace Accounting.Tests.Steps
                         }
                         break;
                 }
+            }
+            cc.GetContext().SaveChanges();
+        }
+        
+        [Given(@"I create multiple TAccounts")]
+        [When(@"I create multiple TAccounts")]
+        public void GivenICreateMultipleTAccounts(Table table)
+        {
+            var service = new TAccountService(cc.GetContext());
+            foreach (var r in table.Rows)
+            {
+                var number = r["Number"];
+                var ledgerStr = r["Ledger"];
+                var label = r["Label"];
+                var ledger = cc.GetContext().Ledgers.FirstOrDefault(o => o.Name == ledgerStr);
+                var account = service.CreateTAccount();
+                account.Number = number;
+                account.Label = label;
+                account.Ledger = ledger;
             }
             cc.GetContext().SaveChanges();
         }

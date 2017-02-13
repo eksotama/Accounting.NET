@@ -5,21 +5,11 @@ Background:
 		| Property | Value    |
 		| Name     | MyLedger |
 		| Depth    | 3        |
-	And I create a TAccount "T1" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 100         |
-		| Label    | Account 100 |
-	And I create a TAccount "T2" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 200         |
-		| Label    | Account 200 |
-	And I create a TAccount "T3" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 300         |
-		| Label    | Account 300 |
+	And I create multiple TAccounts
+		| Number | Ledger   | Label       |
+		| 100    | MyLedger | Account 100 |
+		| 200    | MyLedger | Account 200 |
+		| 300    | MyLedger | Account 300 |
 
 #### CREATE
 
@@ -68,6 +58,23 @@ Scenario Outline: Macro - Define script - Hard coded value
 	| Decimal         | 10.50        | 10.50  |
 	| Decimal (Add)   | 10.50 + 0.50 | 11.00  |
 
+Scenario: Macro - Define script - Parameters
+	Given I create a macro "M" with the properties
+		| Property | Value  |
+		| Name     | Macro1 |
+	And I update the script of the macro "M" to 
+		"""
+		def __main():
+			return __X__ + __Y__
+		#enddef
+		"""
+	When I execute the macro "M" on ledger "L" into result "MR" with parameters
+		| Name | Value |
+		| X    | 10.00 |
+		| Y    | 5.00  |
+	Then the macro result "MR" is "15.00"
+
+
 Scenario: Macro - Define script - Call another macro
 	Given I create a macro "M" with the properties
 		| Property | Value  |
@@ -114,3 +121,33 @@ Scenario: Macro - Define script - Add a transaction
 		| TransDebit | Debit | Credit | TransCredit |
 		|            |       | 10.00  | 1           |
 
+Scenario: Macro - Define script - Add a transaction with parameters
+	Given I create a macro "M" with the properties
+		| Property | Value  |
+		| Name     | Macro1 |
+	And I update the script of the macro "M" to 
+		"""
+		def __main():
+			t = _ledger.T()
+			t.__CD1__('100', __Var1__)
+			t.__CD2__('200', __Var2__)
+			t.__CD3__('300', __Var3__)
+		#enddef
+		"""
+	When I execute the macro "M" on ledger "L" into result "MR" with parameters
+		| Name | Value |
+		| Var1 | 5.00  |
+		| CD1  | D     |
+		| Var2 | 5.00  |
+		| CD2  | D     |
+		| Var3 | 10.00 |
+		| CD3  | C     |
+	Then the content of the TAccount "100" on ledger "MyLedger" is
+		| TransDebit | Debit | Credit | TransCredit |
+		| 1          | 5.00  |        |             |
+	And the content of the TAccount "200" on ledger "MyLedger" is
+		| TransDebit | Debit | Credit | TransCredit |
+		| 1          | 5.00  |        |             |
+	And the content of the TAccount "300" on ledger "MyLedger" is
+		| TransDebit | Debit | Credit | TransCredit |
+		|            |       | 10.00  | 1           |

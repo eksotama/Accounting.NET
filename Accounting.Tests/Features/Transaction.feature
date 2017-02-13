@@ -5,42 +5,15 @@ Background:
 		| Property | Value    |
 		| Name     | MyLedger |
 		| Depth    | 3        |
-
-	Given I create a TAccount "T100" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 100         |
-		| Label    | Account 100 |
-	And I create a TAccount "T200" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 200         |
-		| Label    | Account 200 |
-	And I create a TAccount "T300" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 300         |
-		| Label    | Account 300 |
-	And I create a TAccount "T500" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 500         |
-		| Label    | Account 500 |
-	And I create a TAccount "T501" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 501         |
-		| Label    | Account 501 |
-	And I create a TAccount "T510" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 510         |
-		| Label    | Account 510 |
-	And I create a TAccount "T511" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 511         |
-		| Label    | Account 511 |
+	And I create multiple TAccounts
+		| Number | Ledger   | Label       |
+		| 100    | MyLedger | Account 100 |
+		| 200    | MyLedger | Account 200 |
+		| 300    | MyLedger | Account 300 |
+		| 500    | MyLedger | Account 500 |
+		| 501    | MyLedger | Account 501 |
+		| 510    | MyLedger | Account 510 |
+		| 511    | MyLedger | Account 511 |
 
 Scenario: Transaction - Record a transaction - NF
 	When I record a transaction "TRANS1" on ledger "MyLedger"

@@ -69,6 +69,28 @@ namespace Accounting.Tests
             cc.ObjectBag["macroResult-" + resultReference] = result;
         }
 
+        [When(@"I execute the macro ""(.*)"" on ledger ""(.*)"" into result ""(.*)"" with parameters")]
+        public void WhenIExecuteTheMacroOnLedgerIntoResultWithParameters(string reference, string ledgerReference, string resultReference, Table table)
+        {
+            var m = (Macro)cc.ObjectBag["macro-" + reference];
+            var l = (Ledger)cc.ObjectBag["ledger-" + ledgerReference];
+            cc.GetContext().Entry(m).Reload();
+            cc.GetContext().Entry(l).Reload();
+            var service = new MacroService(cc.GetContext());
+            
+            var parameters = new MacroScriptParameters();
+            foreach (var r in table.Rows)
+            {
+                parameters.SetParameter(r["Name"], r["Value"]);
+            }
+            var result = service.RunScript(m, l, parameters);
+
+            cc.GetContext().SaveChanges();
+
+            cc.ObjectBag["macroResult-" + resultReference] = result;
+        }
+
+
         [Then(@"the macro result ""(.*)"" is ""(.*)""")]
         public void ThenTheMacroResultIs(string reference, string expected)
         {

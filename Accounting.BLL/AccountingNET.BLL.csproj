@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\MacroScriptParameters.cs" />
     <Compile Include="Components\MacroScriptRunner.cs" />
     <Compile Include="ScriptProxies\MacroProxy.cs" />
     <Compile Include="ScriptProxies\LedgerProxy.cs" />

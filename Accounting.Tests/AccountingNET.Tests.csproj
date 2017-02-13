@@ -133,7 +133,7 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TAccount.feature.cs</LastGenOutput>
     </None>
-    <None Include="Resources\TAccounts\pcmn_be.json" />
+    <None Include="Resources\TAccounts\be_fr_pcmn_full.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Accounting.BLL\AccountingNET.BLL.csproj">

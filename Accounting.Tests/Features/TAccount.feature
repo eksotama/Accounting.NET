@@ -47,16 +47,10 @@ Scenario: TAccount - Create a TAccount - Number is longer that ledger depth
 	Then I receive this error message: "TAccount.Number.LengthLongerThanLedgerDepth"
 
 Scenario: TAccount - Sum a TAccount - NF
-	Given I create a TAccount "T1" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 100         |
-		| Label    | Account 100 |
-	And I create a TAccount "T2" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 200         |
-		| Label    | Account 200 |
+	Given I create multiple TAccounts
+		| Number | Ledger   | Label       |
+		| 100    | MyLedger | Account 100 |
+		| 200    | MyLedger | Account 200 |
 	And I record a transaction "TRANS1" on ledger "MyLedger"
 		| Debit | Credit | Amount Debit | Amount Credit |
 		| 100   |        | 10.00        |               |
@@ -79,31 +73,13 @@ Scenario: TAccount - Sum a TAccount - NF
 	And the credit balance of the TAccount "100" on ledger "MyLedger" is "-11.00"
 
 Scenario: TAccount - Sum an aggregated TAccount - NF
-	Given I create a TAccount "T1" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 100         |
-		| Label    | Account 100 |
-	And I create a TAccount "T500" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 500         |
-		| Label    | Account 500 |
-	And I create a TAccount "T501" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 501         |
-		| Label    | Account 501 |
-	And I create a TAccount "T510" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 510         |
-		| Label    | Account 510 |
-	And I create a TAccount "T511" with the properties
-		| Property | Value       |
-		| Ledger   | MyLedger    |
-		| Number   | 511         |
-		| Label    | Account 511 |
+	Given I create multiple TAccounts
+		| Number | Ledger   | Label       |
+		| 100    | MyLedger | Account 100 |
+		| 500    | MyLedger | Account 500 |
+		| 501    | MyLedger | Account 501 |
+		| 510    | MyLedger | Account 510 |
+		| 511    | MyLedger | Account 511 |
 	And I record a transaction "TRANS1" on ledger "MyLedger"
 		| Debit | Credit | Amount Debit | Amount Credit |
 		| 500   |        | 10.00        |               |
