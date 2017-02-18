@@ -17,38 +17,34 @@ namespace AccountingNET.Tests.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("Macro")]
     public partial class MacroFeature
     {
         
-        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
-        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        [NUnit.Framework.TestFixtureSetUpAttribute()]
+        public virtual void FeatureSetup()
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Macro", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
-        public static void FeatureTearDown()
+        [NUnit.Framework.TestFixtureTearDownAttribute()]
+        public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
-            if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Macro")))
-            {
-                AccountingNET.Tests.Features.MacroFeature.FeatureSetup(null);
-            }
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -95,9 +91,8 @@ namespace AccountingNET.Tests.Features
             testRunner.And("I create multiple TAccounts", ((string)(null)), table2, "And ");
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Create a macro - NF")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Macro - Create a macro - NF")]
         public virtual void Macro_CreateAMacro_NF()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Create a macro - NF", ((string[])(null)));
@@ -120,6 +115,9 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Macro - Create a macro - Mandatory properties missing")]
+        [NUnit.Framework.TestCaseAttribute("Name", "", "Macro.Name.Empty", new string[0])]
         public virtual void Macro_CreateAMacro_MandatoryPropertiesMissing(string description, string name, string message, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Create a macro - Mandatory properties missing", exampleTags);
@@ -136,18 +134,17 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Create a macro - Mandatory properties missing: Name")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Name")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Name")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Name", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "Macro.Name.Empty")]
-        public virtual void Macro_CreateAMacro_MandatoryPropertiesMissing_Name()
-        {
-            this.Macro_CreateAMacro_MandatoryPropertiesMissing("Name", "", "Macro.Name.Empty", ((string[])(null)));
-        }
-        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Macro - Define script - Hard coded value")]
+        [NUnit.Framework.TestCaseAttribute("String", "\'20\'", "20", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("String (Concat)", "\'20\' + \'20\'", "2020", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Int", "20", "20", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Int (Add)", "20 + 1", "21", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Int (Substract)", "20 - 1", "19", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Int (Multiply)", "2 * 3", "6", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Int (Divide)", "10 / 5", "2", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Decimal", "10.50", "10.50", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Decimal (Add)", "10.50 + 0.50", "11.00", new string[0])]
         public virtual void Macro_DefineScript_HardCodedValue(string description, string input, string output, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Hard coded value", exampleTags);
@@ -166,117 +163,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Hard coded value: String")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "String")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "String")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "\'20\'")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "20")]
-        public virtual void Macro_DefineScript_HardCodedValue_String()
-        {
-            this.Macro_DefineScript_HardCodedValue("String", "\'20\'", "20", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Hard coded value: String (Concat)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "String (Concat)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "String (Concat)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "\'20\' + \'20\'")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "2020")]
-        public virtual void Macro_DefineScript_HardCodedValue_StringConcat()
-        {
-            this.Macro_DefineScript_HardCodedValue("String (Concat)", "\'20\' + \'20\'", "2020", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Hard coded value: Int")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Int")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Int")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "20")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "20")]
-        public virtual void Macro_DefineScript_HardCodedValue_Int()
-        {
-            this.Macro_DefineScript_HardCodedValue("Int", "20", "20", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Hard coded value: Int (Add)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Int (Add)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Int (Add)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "20 + 1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "21")]
-        public virtual void Macro_DefineScript_HardCodedValue_IntAdd()
-        {
-            this.Macro_DefineScript_HardCodedValue("Int (Add)", "20 + 1", "21", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Hard coded value: Int (Substract)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Int (Substract)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Int (Substract)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "20 - 1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "19")]
-        public virtual void Macro_DefineScript_HardCodedValue_IntSubstract()
-        {
-            this.Macro_DefineScript_HardCodedValue("Int (Substract)", "20 - 1", "19", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Hard coded value: Int (Multiply)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Int (Multiply)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Int (Multiply)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "2 * 3")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "6")]
-        public virtual void Macro_DefineScript_HardCodedValue_IntMultiply()
-        {
-            this.Macro_DefineScript_HardCodedValue("Int (Multiply)", "2 * 3", "6", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Hard coded value: Int (Divide)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Int (Divide)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Int (Divide)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "10 / 5")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "2")]
-        public virtual void Macro_DefineScript_HardCodedValue_IntDivide()
-        {
-            this.Macro_DefineScript_HardCodedValue("Int (Divide)", "10 / 5", "2", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Hard coded value: Decimal")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Decimal")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Decimal")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "10.50")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "10.50")]
-        public virtual void Macro_DefineScript_HardCodedValue_Decimal()
-        {
-            this.Macro_DefineScript_HardCodedValue("Decimal", "10.50", "10.50", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Hard coded value: Decimal (Add)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Decimal (Add)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Decimal (Add)")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "10.50 + 0.50")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "11.00")]
-        public virtual void Macro_DefineScript_HardCodedValue_DecimalAdd()
-        {
-            this.Macro_DefineScript_HardCodedValue("Decimal (Add)", "10.50 + 0.50", "11.00", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Parameters")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Macro - Define script - Parameters")]
         public virtual void Macro_DefineScript_Parameters()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Parameters", ((string[])(null)));
@@ -304,9 +192,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Call another macro")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Macro - Define script - Call another macro")]
         public virtual void Macro_DefineScript_CallAnotherMacro()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Call another macro", ((string[])(null)));
@@ -333,9 +220,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Call another macro with parameters")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Macro - Define script - Call another macro with parameters")]
         public virtual void Macro_DefineScript_CallAnotherMacroWithParameters()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Call another macro with parameters", ((string[])(null)));
@@ -363,9 +249,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Call another macro with parameters - forward parameters")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Macro - Define script - Call another macro with parameters - forward parameters")]
         public virtual void Macro_DefineScript_CallAnotherMacroWithParameters_ForwardParameters()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Call another macro with parameters - forward parameters", ((string[])(null)));
@@ -402,9 +287,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Add a transaction")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Macro - Define script - Add a transaction")]
         public virtual void Macro_DefineScript_AddATransaction()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Add a transaction", ((string[])(null)));
@@ -456,9 +340,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Macro - Define script - Add a transaction with parameters")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Macro")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Macro - Define script - Add a transaction with parameters")]
         public virtual void Macro_DefineScript_AddATransactionWithParameters()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Macro - Define script - Add a transaction with parameters", ((string[])(null)));

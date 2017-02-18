@@ -17,38 +17,34 @@ namespace AccountingNET.Tests.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("Transaction")]
     public partial class TransactionFeature
     {
         
-        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
-        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        [NUnit.Framework.TestFixtureSetUpAttribute()]
+        public virtual void FeatureSetup()
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Transaction", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
-        public static void FeatureTearDown()
+        [NUnit.Framework.TestFixtureTearDownAttribute()]
+        public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
-            if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Transaction")))
-            {
-                AccountingNET.Tests.Features.TransactionFeature.FeatureSetup(null);
-            }
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -111,9 +107,8 @@ namespace AccountingNET.Tests.Features
             testRunner.And("I create multiple TAccounts", ((string)(null)), table2, "And ");
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Record a transaction on a named account - NF")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Transaction - Record a transaction on a named account - NF")]
         public virtual void Transaction_RecordATransactionOnANamedAccount_NF()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transaction - Record a transaction on a named account - NF", ((string[])(null)));
@@ -166,9 +161,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Record a transaction on an anonymous account - NF")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Transaction - Record a transaction on an anonymous account - NF")]
         public virtual void Transaction_RecordATransactionOnAnAnonymousAccount_NF()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transaction - Record a transaction on an anonymous account - NF", ((string[])(null)));
@@ -221,6 +215,12 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Transaction - Record a transaction - Mandatory properties missing")]
+        [NUnit.Framework.TestCaseAttribute("Account missing", "", "", "10.00", "", "Transaction.Record.Account.Missing", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Only one account per entry", "100", "200", "10.00", "", "Transaction.Record.Account.OnlyOneAccountPerEntry", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Debit amount missing", "100", "", "", "", "Transaction.Record.DebitAmount.Missing", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Credit amount missing", "", "100", "", "", "Transaction.Record.CreditAmount.Missing", new string[0])]
         public virtual void Transaction_RecordATransaction_MandatoryPropertiesMissing(string description, string debit, string credit, string amountDebit, string amountCredit, string message, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transaction - Record a transaction - Mandatory properties missing", exampleTags);
@@ -241,73 +241,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Record a transaction - Mandatory properties missing: Account missin" +
-            "g")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Account missing")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Account missing")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Debit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Credit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:AmountDebit", "10.00")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:AmountCredit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "Transaction.Record.Account.Missing")]
-        public virtual void Transaction_RecordATransaction_MandatoryPropertiesMissing_AccountMissing()
-        {
-            this.Transaction_RecordATransaction_MandatoryPropertiesMissing("Account missing", "", "", "10.00", "", "Transaction.Record.Account.Missing", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Record a transaction - Mandatory properties missing: Only one accou" +
-            "nt per entry")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Only one account per entry")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Only one account per entry")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Debit", "100")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Credit", "200")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:AmountDebit", "10.00")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:AmountCredit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "Transaction.Record.Account.OnlyOneAccountPerEntry")]
-        public virtual void Transaction_RecordATransaction_MandatoryPropertiesMissing_OnlyOneAccountPerEntry()
-        {
-            this.Transaction_RecordATransaction_MandatoryPropertiesMissing("Only one account per entry", "100", "200", "10.00", "", "Transaction.Record.Account.OnlyOneAccountPerEntry", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Record a transaction - Mandatory properties missing: Debit amount m" +
-            "issing")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Debit amount missing")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Debit amount missing")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Debit", "100")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Credit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:AmountDebit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:AmountCredit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "Transaction.Record.DebitAmount.Missing")]
-        public virtual void Transaction_RecordATransaction_MandatoryPropertiesMissing_DebitAmountMissing()
-        {
-            this.Transaction_RecordATransaction_MandatoryPropertiesMissing("Debit amount missing", "100", "", "", "", "Transaction.Record.DebitAmount.Missing", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Record a transaction - Mandatory properties missing: Credit amount " +
-            "missing")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Credit amount missing")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Description", "Credit amount missing")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Debit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Credit", "100")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:AmountDebit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:AmountCredit", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "Transaction.Record.CreditAmount.Missing")]
-        public virtual void Transaction_RecordATransaction_MandatoryPropertiesMissing_CreditAmountMissing()
-        {
-            this.Transaction_RecordATransaction_MandatoryPropertiesMissing("Credit amount missing", "", "100", "", "", "Transaction.Record.CreditAmount.Missing", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Record a transaction - NF - Multiple accounts on debit side")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Transaction - Record a transaction - NF - Multiple accounts on debit side")]
         public virtual void Transaction_RecordATransaction_NF_MultipleAccountsOnDebitSide()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transaction - Record a transaction - NF - Multiple accounts on debit side", ((string[])(null)));
@@ -376,9 +311,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Record a transaction - NF - Multiple accounts on credit side")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Transaction - Record a transaction - NF - Multiple accounts on credit side")]
         public virtual void Transaction_RecordATransaction_NF_MultipleAccountsOnCreditSide()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transaction - Record a transaction - NF - Multiple accounts on credit side", ((string[])(null)));
@@ -447,9 +381,8 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Record multiple transactions - NF")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Transaction - Record multiple transactions - NF")]
         public virtual void Transaction_RecordMultipleTransactions_NF()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transaction - Record multiple transactions - NF", ((string[])(null)));
@@ -512,10 +445,9 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Recorded transactions on sub-accounts are aggregated at upper level" +
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Transaction - Recorded transactions on sub-accounts are aggregated at upper level" +
             "s when in the same transaction")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
         public virtual void Transaction_RecordedTransactionsOnSub_AccountsAreAggregatedAtUpperLevelsWhenInTheSameTransaction()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transaction - Recorded transactions on sub-accounts are aggregated at upper level" +
@@ -614,10 +546,9 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Recorded transactions on sub-accounts are aggregated at upper level" +
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Transaction - Recorded transactions on sub-accounts are aggregated at upper level" +
             "s when in different transactions on the same side")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
         public virtual void Transaction_RecordedTransactionsOnSub_AccountsAreAggregatedAtUpperLevelsWhenInDifferentTransactionsOnTheSameSide()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transaction - Recorded transactions on sub-accounts are aggregated at upper level" +
@@ -749,10 +680,9 @@ namespace AccountingNET.Tests.Features
             this.ScenarioCleanup();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Transaction - Recorded transactions on sub-accounts are aggregated at upper level" +
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Transaction - Recorded transactions on sub-accounts are aggregated at upper level" +
             "s when in different transactions on different sides")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Transaction")]
         public virtual void Transaction_RecordedTransactionsOnSub_AccountsAreAggregatedAtUpperLevelsWhenInDifferentTransactionsOnDifferentSides()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transaction - Recorded transactions on sub-accounts are aggregated at upper level" +

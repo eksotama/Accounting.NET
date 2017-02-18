@@ -64,6 +64,10 @@
       <HintPath>..\packages\NMemory.1.1.2\lib\net45\NMemory.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.0.5797.27534, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.0.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -122,7 +126,9 @@
     <Compile Include="Utils\CommonContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Features\Macro.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Macro.feature.cs</LastGenOutput>
