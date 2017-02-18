@@ -36,7 +36,7 @@ Scenario: TAccount - Create a TAccount - Number is shorter that ledger depth
 		| Ledger   | MyLedger   |
 		| Number   | 12         |
 		| Label    | My Account |
-	Then I receive this error message: "TAccount.Number.LengthShorterThanLedgerDepth"
+	Then I receive this ok message: "TAccount.Created.Ok"
 
 Scenario: TAccount - Create a TAccount - Number is longer that ledger depth
 	When I create a TAccount "T1" with the properties
@@ -100,4 +100,4 @@ Scenario: TAccount - Sum an aggregated TAccount - NF
 	And the debit balance of the TAccount "5" on ledger "MyLedger" is "40.00"
 	And the credit balance of the TAccount "5" on ledger "MyLedger" is "-40.00"
 
-	
+

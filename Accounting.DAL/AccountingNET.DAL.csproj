@@ -7,8 +7,8 @@
     <ProjectGuid>{C9DD19E6-4AE5-47EC-A9F9-1DCE37F6DD31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Accounting.DAL</RootNamespace>
-    <AssemblyName>Accounting.DAL</AssemblyName>
+    <RootNamespace>AccountingNET.DAL</RootNamespace>
+    <AssemblyName>AccountingNET.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

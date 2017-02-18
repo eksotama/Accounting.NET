@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Accounting.Tests.Features
+namespace AccountingNET.Tests.Features
 {
     using TechTalk.SpecFlow;
     
@@ -44,7 +44,7 @@ namespace Accounting.Tests.Features
             if (((testRunner.FeatureContext != null) 
                         && (testRunner.FeatureContext.FeatureInfo.Title != "Macro")))
             {
-                Accounting.Tests.Features.MacroFeature.FeatureSetup(null);
+                AccountingNET.Tests.Features.MacroFeature.FeatureSetup(null);
             }
         }
         

@@ -15,7 +15,7 @@ Background:
 		| 510    | MyLedger | Account 510 |
 		| 511    | MyLedger | Account 511 |
 
-Scenario: Transaction - Record a transaction - NF
+Scenario: Transaction - Record a transaction on a named account - NF
 	When I record a transaction "TRANS1" on ledger "MyLedger"
 		| Debit | Credit | Amount Debit | Amount Credit |
 		| 100   |        | 50.00        |               |
@@ -32,6 +32,24 @@ Scenario: Transaction - Record a transaction - NF
 	And the content of the TAccount "200" on ledger "MyLedger" is
 		| TransDebit | Debit | Credit | TransCredit |
 		|            |       | 50.00  | 1           |
+
+Scenario: Transaction - Record a transaction on an anonymous account - NF
+	When I record a transaction "TRANS1" on ledger "MyLedger"
+		| Debit | Credit | Amount Debit | Amount Credit |
+		| 10    |        | 50.00        |               |
+		|       | 20     |              | 50.00         |
+	Then I receive this ok message: "Transaction.Recorded.Ok"
+	And the number of transactions on ledger "MyLedger" is "1"
+	And the number of entries is "2" for transaction "TRANS1"
+	And the number of debit entries is "1" for transaction "TRANS1"
+	And the number of credit entries is "1" for transaction "TRANS1"
+	And the transaction "TRANS1" is balanced
+	And the content of the TAccount "10" on ledger "MyLedger" is
+		| TransDebit | Debit | Credit | TransCredit |
+		| 1          | 50.00 |        |             |
+	And the content of the TAccount "20" on ledger "MyLedger" is
+		| TransDebit | Debit | Credit | TransCredit |
+		|            |       | 50.00  | 1           |	
 
 Scenario Outline: Transaction - Record a transaction - Mandatory properties missing
 	When I record a transaction "TRANS1" on ledger "MyLedger"

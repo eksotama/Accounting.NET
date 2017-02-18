@@ -25,6 +25,7 @@ namespace Accounting.Tests.Steps
         {
             var ledger = this.cc.GetContext().Ledgers.FirstOrDefault(o => o.Name == ledgerName);
             var transactionService = new TransactionService(this.cc.GetContext());
+            var accountService = new TAccountService(cc.GetContext());
             var trans = transactionService.CreateTransaction(ledger);
 
             foreach(var r in table.Rows)
@@ -44,10 +45,13 @@ namespace Accounting.Tests.Steps
                     debitAmount = decimal.Parse(debitAmountStr);
                 }
 
+                var debitAccount = accountService.GetAccountByNumber(ledger, debitStr);
+                var creditAccount = accountService.GetAccountByNumber(ledger, creditStr);
+
                 transactionService.AddEntryToTransaction(
                     trans,
-                    this.cc.GetContext().TAccounts.FirstOrDefault(o => o.Number == debitStr),
-                    this.cc.GetContext().TAccounts.FirstOrDefault(o => o.Number == creditStr),
+                    debitAccount,
+                    creditAccount,
                     debitAmount,
                     creditAmount
                 );

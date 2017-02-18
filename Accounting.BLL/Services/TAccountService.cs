@@ -26,10 +26,11 @@ namespace Accounting.BLL
 
         public IProcessableTAccount GetAggregatedAccountByNumber(Ledger ledger, string accountNumber)
         {
-            if(accountNumber.Length == ledger.Depth)
-            {
-                return this.Context.TAccounts.FirstOrDefault(o => o.Number == accountNumber);
-            }
+            //var namedAccount = this.Context.TAccounts.FirstOrDefault(o => o.Number == accountNumber);
+            //if (namedAccount != null && !namedAccount.CanAggregate)
+            //{
+            //    return namedAccount;
+            //}
             var accounts = ledger.Accounts.Where(o => o.Number.StartsWith(accountNumber)).ToList();
             var result = new TAccountAggregated();
             result.Number = accountNumber;
@@ -40,6 +41,43 @@ namespace Accounting.BLL
             }
             result.Entries.Sort((e1, e2) => e1.Transaction.Sequence.CompareTo(e1.Transaction.Sequence));
             return result;
+        }
+
+        private string CompleteAccountToFitLedger(Ledger ledger, string accountNumber)
+        {
+            if (accountNumber.Length < ledger.Depth)
+            {
+                var toFill = ledger.Depth - accountNumber.Length;
+                for (var k = 0; k < toFill; k++)
+                {
+                    accountNumber += "_";
+                } 
+            }
+            return accountNumber;
+        }
+
+        public TAccount GetAccountByNumber(Ledger ledger, string accountNumber = "")
+        {
+            // Reject empty account number
+            if (ledger == null || string.IsNullOrWhiteSpace(accountNumber))
+            {
+                return null;
+            }
+
+            // Look for an existing account
+            var namedAccount = this.Context.TAccounts.FirstOrDefault(o => o.Number == accountNumber);
+            if (namedAccount != null)
+            {
+                return namedAccount;
+            }
+
+            // Build a virtual account otherwise
+            var virtualAccount = CreateTAccount();
+            virtualAccount.Label = $"virtual-{accountNumber}";
+            virtualAccount.Ledger = ledger;
+            virtualAccount.IsVirtual = true;
+            virtualAccount.Number = CompleteAccountToFitLedger(ledger, accountNumber);
+            return virtualAccount;
         }
 
         public decimal GetDebitSum(IProcessableTAccount account)

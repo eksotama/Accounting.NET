@@ -7,8 +7,8 @@
     <ProjectGuid>{712DFBD5-5048-407A-82C8-6ED90FFC4048}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Accounting.BLL</RootNamespace>
-    <AssemblyName>Accounting.BLL</AssemblyName>
+    <RootNamespace>AccountingNET.BLL</RootNamespace>
+    <AssemblyName>AccountingNET.BLL</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

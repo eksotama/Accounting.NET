@@ -21,14 +21,18 @@ namespace Accounting.BLL
         public void D(string account, decimal value)
         {
             var tService = new TransactionService(_context);
-            var tAccount = _transaction.Ledger.Accounts.FirstOrDefault(o => o.Number == account);
+            var tAccountService = new TAccountService(_context);
+            //var tAccount = _transaction.Ledger.Accounts.FirstOrDefault(o => o.Number == account);
+            var tAccount = tAccountService.GetAccountByNumber(_transaction.Ledger, account);
             tService.AddEntryToTransaction(_transaction, tAccount, null, value, null);
         }
 
         public void C(string account, decimal value)
         {
             var tService = new TransactionService(_context);
-            var tAccount = _transaction.Ledger.Accounts.FirstOrDefault(o => o.Number == account);
+            var tAccountService = new TAccountService(_context);
+            //var tAccount = _transaction.Ledger.Accounts.FirstOrDefault(o => o.Number == account);
+            var tAccount = tAccountService.GetAccountByNumber(_transaction.Ledger, account);
             tService.AddEntryToTransaction(_transaction, null, tAccount, null, value);
         }
     }

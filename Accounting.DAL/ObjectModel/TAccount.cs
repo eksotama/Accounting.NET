@@ -23,6 +23,7 @@ namespace Accounting.DAL
         string Number { get; set; }
         string Label { get; set; }
         List<TAccount_Entry> Entries { get; set; }
+        bool IsVirtual { get; set; }
     }
 
     public class TAccountAggregated : IProcessableTAccount
@@ -36,10 +37,13 @@ namespace Accounting.DAL
         [NotMapped]
         public string Number { get; set; }
         
+        [NotMapped]
+        public bool IsVirtual { get; set; }
 
         public TAccountAggregated()
         {
             this.Entries = new List<TAccount_Entry>();
+            this.IsVirtual = true;
         }
     }
 
@@ -55,8 +59,34 @@ namespace Accounting.DAL
         [ForeignKey("LedgerId")]
         public virtual Ledger Ledger { get; set; }
 
+        public bool IsVirtual { get; set; }
+
         [InverseProperty("Account")]
         public virtual List<TAccount_Entry> Entries { get; set; }
+
+        [NotMapped]
+        public bool CanAggregate
+        {
+            get
+            {
+                return OriginalNumber.Length < Ledger.Depth;
+            }
+        }
+
+        [NotMapped]
+        public string OriginalNumber
+        {
+            get
+            {
+                return Number.Replace("_", "");
+            }
+        }
+
+        public TAccount()
+        {
+            IsVirtual = false;
+            this.Entries = new List<TAccount_Entry>();
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -80,10 +110,10 @@ namespace Accounting.DAL
                 {
                     "TAccount.Label.Empty".AddErrorMessage(context, errors);
                 }
-                if (obj.Number.Length < obj?.Ledger?.Depth)
-                {
-                    "TAccount.Number.LengthShorterThanLedgerDepth".AddErrorMessage(context, errors);
-                }
+                //if (obj.Number.Length < obj?.Ledger?.Depth)
+                //{
+                //    "TAccount.Number.LengthShorterThanLedgerDepth".AddErrorMessage(context, errors);
+                //}
                 if (obj.Number.Length > obj?.Ledger?.Depth)
                 {
                     "TAccount.Number.LengthLongerThanLedgerDepth".AddErrorMessage(context, errors);

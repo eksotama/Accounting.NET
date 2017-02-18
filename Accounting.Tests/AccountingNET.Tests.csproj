@@ -6,8 +6,8 @@
     <ProjectGuid>{2E3F2153-8FF4-4F56-8914-C9794236009C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Accounting.Tests</RootNamespace>
-    <AssemblyName>Accounting.Tests</AssemblyName>
+    <RootNamespace>AccountingNET.Tests</RootNamespace>
+    <AssemblyName>AccountingNET.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -56,6 +56,10 @@
       <HintPath>..\packages\FluentAssertions.4.19.0\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NMemory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
       <HintPath>..\packages\NMemory.1.1.2\lib\net45\NMemory.dll</HintPath>
       <Private>True</Private>
@@ -94,6 +98,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Features\Macro.Operations.Belgium.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Macro.Operations.Belgium.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Transaction.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,6 +131,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Ledger.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Macro.Operations.Belgium.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Macro.Operations.Belgium.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Transaction.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Transaction.feature.cs</LastGenOutput>
@@ -133,7 +146,7 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TAccount.feature.cs</LastGenOutput>
     </None>
-    <None Include="Resources\TAccounts\be_fr_pcmn_full.json" />
+    <EmbeddedResource Include="Resources\TAccounts\be_fr_pcmn_full.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Accounting.BLL\AccountingNET.BLL.csproj">

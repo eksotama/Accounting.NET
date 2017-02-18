@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Accounting.Tests.Features
+namespace AccountingNET.Tests.Features
 {
     using TechTalk.SpecFlow;
     
@@ -44,7 +44,7 @@ namespace Accounting.Tests.Features
             if (((testRunner.FeatureContext != null) 
                         && (testRunner.FeatureContext.FeatureInfo.Title != "TAccount")))
             {
-                Accounting.Tests.Features.TAccountFeature.FeatureSetup(null);
+                AccountingNET.Tests.Features.TAccountFeature.FeatureSetup(null);
             }
         }
         
@@ -188,7 +188,7 @@ namespace Accounting.Tests.Features
                         "Label",
                         "My Account"});
             testRunner.When("I create a TAccount \"T1\" with the properties", ((string)(null)), table4, "When ");
-            testRunner.Then("I receive this error message: \"TAccount.Number.LengthShorterThanLedgerDepth\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            testRunner.Then("I receive this ok message: \"TAccount.Created.Ok\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
             this.ScenarioCleanup();
         }
         
