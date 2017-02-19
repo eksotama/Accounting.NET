@@ -1,12 +1,17 @@
 version: 1.0.{build}
 configuration: Release
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: 06OIWcMOya+AhImVEzUID4mcw0co88V29hnGNK18qKDD97MUsRz4AgKR2xtcaz3Z
 before_build:
-  - cmd: nuget restore ".\AccountingNET.sln"
+- cmd: nuget restore ".\AccountingNET.sln"
 build:
   project: .\AccountingNET.sln
   verbosity: minimal
 after_test:
-  - ps: >-
-        mkdir coverage-results
-        .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:".\packages\NUnit.ConsoleRunner.3.6.0\nunit3-console.exe" -targetargs:"/nologo /noshadow .\Accounting.Tests\bin\Release\AccountingNET.Tests.dll" "-filter:+[*]* -[AccountingNET.Tests*]*" -skipautoprops -output:.\coverage-results\results.xml
-        .\packages\coveralls.net.0.7.0\tools\csmacnz.Coveralls.exe --opencover --input .\coverage-results\results.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
+- ps: >-
+    mkdir coverage-results
+
+    .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:".\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe" -targetargs:"-noheader .\Accounting.Tests\bin\Release\AccountingNET.Tests.dll" "-filter:+[AccountingNET*]* -[AccountingNET.Tests]*" -skipautoprops -output:.\coverage-results\results.xml
+
+    .\packages\coveralls.net.0.7.0\tools\csmacnz.Coveralls.exe --opencover -i .\coverage-results\results.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
