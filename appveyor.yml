@@ -1,8 +1,9 @@
 version: 1.0.{build}
 configuration: Release
 before_build:
-  - cmd: nuget restore
+  - cmd: nuget restore ".\AccountingNET.sln"
 build:
+  project: .\AccountingNET.sln
   verbosity: minimal
 after_test:
   - ps: >-
